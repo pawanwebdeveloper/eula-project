@@ -22,7 +22,11 @@ Auth::routes(); // Laravel's built-in authentication routes
 
 // Define routes that require authentication
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home')->middleware('accept.eula'); // Home/dashboard route, only accessible to authenticated users
+    Route::middleware(['accept.eula'])->group(function () {
+        Route::get('/home', 'HomeController@index')->name('home'); // Home/dashboard route, only accessible to authenticated users
+    });
     Route::get('/eula', 'EulaController@show')->name('eula'); // Route to display the EULA
     Route::post('/eula/accept', 'EulaController@accept')->name('eula.accept'); // Route to handle EULA acceptance form submission
 });
+Route::get('/eula/management', 'EulaController@index')->name('eula.index'); // Route to display the EULA
+Route::post('/eula/store', 'EulaController@store')->name('eula.store'); // Route to handle EULA acceptance form submission
