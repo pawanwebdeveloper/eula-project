@@ -19,7 +19,7 @@ class AcceptEula
         $user = Auth::user();
 
         // Check if user is authenticated, has not accepted the EULA, and the cookie is not set
-        if ($user && !$user->eula_accepted && !$request->cookie('eula_accepted')) {
+        if ($user && !$user->eula_accepted && !$request->cookie('eula_accepted_'.$user->id)) {
             // Redirect to the EULA page
             return redirect()->route('eula');
         }

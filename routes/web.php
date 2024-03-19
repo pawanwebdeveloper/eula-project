@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route to display the welcome view
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Auth::routes(); // Laravel's built-in authentication routes
